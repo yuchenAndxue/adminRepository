@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.seckill.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.bjpowernode.seckill.model.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nameDesc" jdbcType="VARCHAR" property="namedesc" />
+    <result column="randomName" jdbcType="VARCHAR" property="randomname" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="imageURL" jdbcType="VARCHAR" property="imageurl" />
+    <result column="store" jdbcType="INTEGER" property="store" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, nameDesc, randomName, price, imageURL, store, startTime, endTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bjpowernode.seckill.model.Goods">
+    insert into goods (id, name, nameDesc, 
+      randomName, price, imageURL, 
+      store, startTime, endTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{namedesc,jdbcType=VARCHAR}, 
+      #{randomname,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{imageurl,jdbcType=VARCHAR}, 
+      #{store,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpowernode.seckill.model.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="namedesc != null">
+        nameDesc,
+      </if>
+      <if test="randomname != null">
+        randomName,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="imageurl != null">
+        imageURL,
+      </if>
+      <if test="store != null">
+        store,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namedesc != null">
+        #{namedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="randomname != null">
+        #{randomname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="store != null">
+        #{store,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.seckill.model.Goods">
+    update goods
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namedesc != null">
+        nameDesc = #{namedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="randomname != null">
+        randomName = #{randomname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="imageurl != null">
+        imageURL = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="store != null">
+        store = #{store,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.seckill.model.Goods">
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      nameDesc = #{namedesc,jdbcType=VARCHAR},
+      randomName = #{randomname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      imageURL = #{imageurl,jdbcType=VARCHAR},
+      store = #{store,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--查询所有商品信息-->
+  <select id="selectAllGoodsList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from goods
+  </select>
+
+</mapper>
